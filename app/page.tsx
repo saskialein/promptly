@@ -6,7 +6,7 @@ export default function Home() {
       <h1 className="head_text text-center">
         Search & Share
         <br/>
-        <span className="orange_gradient text-center">AI-Powered Prompts</span>
+        <span className="purple_gradient text-center">AI-Powered Prompts</span>
       </h1>
       <p className="desc text-center">
         Search, create, and share innovative AI prompts with Promptly – your
@@ -14,5 +14,5 @@ export default function Home() {
       </p>
       <Feed />
     </section>
-  );
+  )
 }

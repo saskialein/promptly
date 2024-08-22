@@ -35,11 +35,11 @@ const Nav = () => {
         <Image
           src="/assets/images/logo.svg"
           alt="logo"
-          width={30}
-          height={30}
+          width={60}
+          height={60}
           className="object-contain"
         />
-        <p className="logo_text">Promptopia</p>
+        <p className="logo_text">Promptly</p>
       </Link>
 
       {/* Desktop Navigation */}

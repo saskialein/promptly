@@ -1,20 +1,17 @@
 import { connectToDB } from "@utils/database";
-import NextAuth from "next-auth";
+import NextAuth, { Profile as NextAuthProfile } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
+
+interface ExtendedProfile extends NextAuthProfile {
+  picture?: string;
+}
 
 const handler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
     }),
   ],
   callbacks: {
@@ -39,7 +36,7 @@ const handler = NextAuth({
           await User.create({
             email: profile?.email,
             username: profile?.name?.replace(" ", "").toLowerCase(),
-            image: profile?.image,
+            image: (profile as ExtendedProfile)?.picture,
           });
         }
 
