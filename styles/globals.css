@@ -55,11 +55,8 @@
   @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
 }
 
-/* .black_btn {
-  @apply rounded-full border border-black  bg-black dark:bg-white py-1.5 px-5 text-white dark:text-black transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
-} */
 
-.black_btn {
+.main_btn {
   @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all text-center text-sm font-inter flex items-center justify-center;
 
   /* Light mode styles */
@@ -67,7 +64,7 @@
 }
 
 /* Dark mode specific styles */
-.dark .black_btn {
+.dark .main_btn {
   @apply bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 bg-clip-border text-transparent border-none;
 }
 
@@ -119,6 +116,10 @@
 /* Feed Component */
 .feed {
   @apply mt-16 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2;
+}
+
+.chat {
+  @apply w-full flex justify-center items-center flex-col gap-0 ;
 }
 
 /* Form Component */
