@@ -24,7 +24,7 @@ export type PromptList = Prompt[];
 
 const PromptCardList = ({ data, handleTagClick }: PromptCardListProps) => {
   return (
-    <div className="mt-16 prompt_layout">
+    <div className="prompt_layout mt-16">
       {data.map((post) => (
         <PromptCard
           key={post._id}
@@ -86,7 +86,7 @@ export default function Feed() {
 
   return (
     <section className="feed">
-      <form className="relative w-full flex-center">
+      <form className="flex-center relative w-full">
         <input
           type="text"
           placeholder="Search for a tag or a username..."

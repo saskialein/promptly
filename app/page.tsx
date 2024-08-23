@@ -3,7 +3,7 @@ import Chat from "@components/Chat";
 
 export default function Home() {
   return (
-    <section className="w-full flex-center flex-col">
+    <section className="flex-center w-full flex-col">
       <h1 className="head_text text-center">
         Craft & Chat
         <br />

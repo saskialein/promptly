@@ -40,9 +40,9 @@ export default function PromptCard({
 
   return (
     <div className="prompt_card">
-      <div className="flex justify-between items-start gap-5">
+      <div className="flex items-start justify-between gap-5">
         <div
-          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+          className="flex flex-1 cursor-pointer items-center justify-start gap-3"
           onClick={handleProfileClick}
         >
           {/* TODO: Fallback img */}
@@ -79,21 +79,21 @@ export default function PromptCard({
         {post?.prompt}
       </p>
       <p
-        className="font-inter text-sm orange_gradient cursor-pointer"
+        className="orange_gradient cursor-pointer font-inter text-sm"
         onClick={() => handleTagClick && handleTagClick(post?.tag)}
       >
         {post?.tag}
       </p>
       {session?.user.id === post?.creator?._id && pathName === "/profile" && (
-        <div className="mt-5 flex-end gap-4 border-t border-gray-100 pt-3">
+        <div className="flex-end mt-5 gap-4 border-t border-gray-100 pt-3">
           <p
-            className="font-inter text-sm green_gradient cursor-pointer"
+            className="green_gradient cursor-pointer font-inter text-sm"
             onClick={() => handleEdit && handleEdit(post)}
           >
             Edit
           </p>
           <p
-            className="font-inter text-sm orange_gradient cursor-pointer"
+            className="orange_gradient cursor-pointer font-inter text-sm"
             onClick={() => handleDelete && handleDelete(post)}
           >
             Delete

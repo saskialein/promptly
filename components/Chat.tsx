@@ -10,11 +10,11 @@ export default function Chat() {
   return (
     <section className="chat">
       <div className="w-full max-w-2xl">
-        <div className="relative w-full flex flex-col justify-end max-h-[500px] overflow-y-auto bg-white bg-opacity-5 p-4 rounded-lg shadow-md">
+        <div className="relative flex max-h-[500px] w-full flex-col justify-end overflow-y-auto rounded-lg bg-white/5 p-4 shadow-md">
           {messages.map((m) => (
             <div
               key={m.id}
-              className={`whitespace-pre-wrap dark:text-white my-2 ${
+              className={`my-2 whitespace-pre-wrap dark:text-white ${
                 m.role === "user" ? "text-right" : "text-left"
               }`}
             >
@@ -31,7 +31,7 @@ export default function Chat() {
             </div>
           ))}
         </div>
-        <form onSubmit={handleSubmit} className="w-full flex-center">
+        <form onSubmit={handleSubmit} className="flex-center w-full">
           <input
             className="search_input"
             value={input}

@@ -32,7 +32,7 @@ export default function Profile({
           Delete Profile
         </button>
       )}
-      <div className="mt-10 prompt_layout">
+      <div className="prompt_layout mt-10">
         {data.map((post) => (
           <PromptCard
             key={post._id}
