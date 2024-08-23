@@ -12,9 +12,11 @@ import {
   ClientSafeProvider,
 } from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers";
+import { useRouter } from "next/navigation";
 
 const Nav = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const [providers, setProviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
@@ -47,16 +49,23 @@ const Nav = () => {
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="main_btn">
-              Create Post
+              Create Prompt
             </Link>
 
-            <button type="button" onClick={() => signOut()} className="outline_btn">
+            <button
+              type="button"
+              onClick={() => {
+                signOut();
+                router.push("/");
+              }}
+              className="outline_btn"
+            >
               Sign Out
             </button>
 
             <Link href="/profile">
               <Image
-                src={session?.user.image || ''}
+                src={session?.user.image || ""}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -117,6 +126,7 @@ const Nav = () => {
                   onClick={() => {
                     setToggleDropdown(false);
                     signOut();
+                    router.push("/");
                   }}
                   className="mt-5 w-full main_btn"
                 >

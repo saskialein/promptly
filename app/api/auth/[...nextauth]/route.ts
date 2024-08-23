@@ -1,13 +1,9 @@
 import { connectToDB } from "@utils/database";
-import NextAuth, { Profile as NextAuthProfile } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth, { Account, AuthOptions, Profile, Session } from "next-auth";
+import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
 import User from "@models/user";
 
-interface ExtendedProfile extends NextAuthProfile {
-  picture?: string;
-}
-
-const handler = NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
@@ -15,7 +11,7 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session }) {
+    async session({ session }: { session: Session }) {
       const sessionUser = await User.findOne({
         email: session.user?.email,
       });
@@ -24,7 +20,13 @@ const handler = NextAuth({
 
       return session;
     },
-    async signIn({ profile }) {
+    async signIn({
+      account,
+      profile,
+    }: {
+      account: Account | null;
+      profile?: Profile | null;
+    }) {
       try {
         await connectToDB();
 
@@ -36,21 +38,22 @@ const handler = NextAuth({
           await User.create({
             email: profile?.email,
             username: profile?.name?.replace(" ", "").toLowerCase(),
-            image: (profile as ExtendedProfile)?.picture,
+            image: (profile as GoogleProfile)?.picture,
           });
         }
 
-        return true;
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.log("Error checking if user exists: ", error.message);
-        } else {
-          console.log("An unknown error occurred");
+        if (account?.provider === "google") {
+          return (profile as GoogleProfile)?.email_verified;
         }
+        return true;
+      } catch (error) {
+        console.error("Error checking if user exists: ", error);
         return false;
       }
     },
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

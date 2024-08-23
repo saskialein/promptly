@@ -2,7 +2,7 @@
 
 import { Prompt, PromptList } from "@components/Feed";
 import Profile from "@components/Profile";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
@@ -23,11 +23,11 @@ export default function MyProfile() {
     if (session?.user.id) fetchPosts();
   }, [session]);
 
-  const handleEdit = (post: Prompt) => {
+  const handleEditPrompt = (post: Prompt) => {
     router.push(`update-prompt?id=${post._id}`);
   };
 
-  const handleDelete = async (post: Prompt) => {
+  const handleDeletePrompt = async (post: Prompt) => {
     const hasConfirmed = confirm(
       "Are you sure you want to delete this prompt?"
     );
@@ -46,13 +46,35 @@ export default function MyProfile() {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete your profile? This will also delete all your prompts."
+    );
+
+    if (hasConfirmed) {
+      try {
+        const res = await fetch(`/api/user/delete`, {
+          method: "DELETE",
+        });
+
+        if (res.ok) {
+          signOut({ callbackUrl: "/" });
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err);
+      }
+    }
+  };
+
   return (
     <Profile
       name="My"
       desc="Welcome to your personalised profile page"
       data={posts}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
+      handleEditPrompt={handleEditPrompt}
+      handleDeletePrompt={handleDeletePrompt}
+      handleDeleteAccount={handleDeleteAccount}
     />
   );
 }

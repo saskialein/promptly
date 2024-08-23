@@ -16,7 +16,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* <link rel="icon" href="/assets/images/logo.ico" sizes="any" /> */}
         <link
           rel="icon"
           href="/assets/images/logo.svg"
@@ -24,7 +23,10 @@ export default function RootLayout({
           sizes="32x32"
         />
       </head>
-      <body className="bg-white dark:bg-slate-950">
+      <body
+        className="bg-white dark:bg-slate-950"
+        suppressHydrationWarning={true}
+      >
         <Provider>
           <div className="main">
             <div className="gradient" />
