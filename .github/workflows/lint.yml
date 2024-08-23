@@ -1,0 +1,23 @@
+name: Run ESLint and Type Checker
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+
+      - name: Install node dependencies
+        run: npm install
+      
+      - name: Run type checker
+        run: npm run type-check
+
+      - name: Run ESLint
+        run: npm run lint
