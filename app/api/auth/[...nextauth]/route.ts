@@ -39,6 +39,7 @@ export const authOptions: AuthOptions = {
             email: profile?.email,
             username: profile?.name?.replace(" ", "").toLowerCase(),
             image: (profile as GoogleProfile)?.picture,
+            apiKeys: []
           });
         }
 

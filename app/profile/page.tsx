@@ -75,6 +75,7 @@ export default function MyProfile() {
       handleEditPrompt={handleEditPrompt}
       handleDeletePrompt={handleDeletePrompt}
       handleDeleteAccount={handleDeleteAccount}
+      showApiKeysForm={true}
     />
   );
 }
