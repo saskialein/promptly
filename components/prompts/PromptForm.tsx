@@ -25,7 +25,7 @@ export default function PromptForm({
         <span className="blue_gradient">{type} Prompt</span>
       </h1>
       <p className="desc max-w-md text-left">
-        {type} and share amazing propmts with the world, and let your
+        {type} and share amazing prompts with the world, and let your
         imagination run wild with any AI-powered platform.
       </p>
 
