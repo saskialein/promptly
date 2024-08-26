@@ -73,14 +73,14 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
                         },
                         ul({ children, ...props }) {
                           return (
-                            <ul className="list-disc list-inside ml-5" {...props}>
+                            <ul className="ml-5 list-inside list-disc" {...props}>
                               {children}
                             </ul>
                           )
                         },
                         ol({ children, ...props }) {
                           return (
-                            <ol className="list-decimal list-inside ml-5" {...props}>
+                            <ol className="ml-5 list-inside list-decimal" {...props}>
                               {children}
                             </ol>
                           )
