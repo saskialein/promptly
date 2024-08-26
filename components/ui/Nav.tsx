@@ -32,7 +32,6 @@ export default function Nav() {
   }, [])
 
   return (
-    // <nav className="flex-between mb-16 w-full pt-3">
     <nav className="mb-16 flex w-full items-center justify-between pt-3">
       <Link href="/" className="flex-center flex gap-2">
         <Image
@@ -44,24 +43,16 @@ export default function Nav() {
         />
         <p className="logo_text">Promptly</p>
       </Link>
-
-      <div className="hidden flex-1 justify-center sm:flex">
-        <Link href="/create-prompt" className="main_btn">
-          Create Prompt
-        </Link>
-      </div>
-
-      {/* Desktop Navigation */}
-      {/* <div className="hidden sm:flex"> */}
-      <div className="hidden items-center gap-3 sm:flex md:gap-5">
-      
-        {session?.user ? (
-          <>
-          {/* // <div className="flex gap-3 md:gap-5"> */}
-            {/* <Link href="/create-prompt" className="main_btn">
+      {session?.user ? (
+        <>
+          <div className="hidden flex-1 justify-center sm:flex">
+            <Link href="/create-prompt" className="main_btn">
               Create Prompt
-            </Link> */}
+            </Link>
+          </div>
 
+          {/* Desktop Navigation */}
+          <div className="hidden items-center gap-3 sm:flex md:gap-5">
             <button
               type="button"
               onClick={() => {
@@ -82,26 +73,25 @@ export default function Nav() {
                 alt="profile"
               />
             </Link>
-          {/* // </div> */}
-            </>
-        ) : (
-          <>
-            {providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => {
-                    signIn(provider.id)
-                  }}
-                  className="main_btn"
-                >
-                  Sign in
-                </button>
-              ))}
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      ) : (
+        <>
+          {providers &&
+            Object.values(providers).map((provider) => (
+              <button
+                type="button"
+                key={provider.name}
+                onClick={() => {
+                  signIn(provider.id)
+                }}
+                className="main_btn"
+              >
+                Sign in
+              </button>
+            ))}
+        </>
+      )}
 
       {/* Mobile Navigation */}
       <div className="relative flex sm:hidden">
