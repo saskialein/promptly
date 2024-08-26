@@ -1,6 +1,6 @@
 "use client";
 
-import Form from "@components/Form";
+import PromptForm from "@components/prompts/PromptForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -39,7 +39,7 @@ export default function CreatePrompt() {
   };
 
   return (
-    <Form
+    <PromptForm
       type="Create"
       post={post}
       setPost={setPost}

@@ -1,6 +1,7 @@
 'use client'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { TrashIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import { providers } from '@components/chat/ChatOptions'
 
 type ApiKeysFormProps = {
   closeModal: () => void
@@ -13,10 +14,10 @@ export function ApiKeysForm({ closeModal }: ApiKeysFormProps) {
     index: number,
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    const values = [...apiKeys];
-    const name = event.target.name as keyof typeof values[number];
-    values[index][name] = event.target.value;
-    setApiKeys(values);
+    const values = [...apiKeys]
+    const name = event.target.name as keyof (typeof values)[number]
+    values[index][name] = event.target.value
+    setApiKeys(values)
   }
 
   const handleAddFields = () => {
@@ -54,7 +55,7 @@ export function ApiKeysForm({ closeModal }: ApiKeysFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {apiKeys.map((field, index) => (
-        <div key={index} className="flex flex-center space-x-4">
+        <div key={index} className="flex-center flex space-x-4">
           <select
             name="provider"
             value={field.provider}
@@ -62,9 +63,12 @@ export function ApiKeysForm({ closeModal }: ApiKeysFormProps) {
             className="select_input"
           >
             <option value="">Select Provider</option>
-            <option value="openai">OpenAI</option>
-            <option value="anthropic">Anthropic</option>
-            <option value="llama">LLAMA</option>
+
+            {Object.entries(providers).map(([key, { displayName, model }]) => (
+              <option key={key} value={key}>
+                {displayName} - {model}
+              </option>
+            ))}
           </select>
           <input
             name="apiKey"
@@ -76,23 +80,23 @@ export function ApiKeysForm({ closeModal }: ApiKeysFormProps) {
           <button
             type="button"
             onClick={() => handleRemoveFields(index)}
-            className="p-2 rounded-full hover:bg-red-500/30 focus:outline-none"
+            className="rounded-full p-2 hover:bg-red-500/30 focus:outline-none"
           >
-            <TrashIcon className="h-5 w-5 text-white" />
+            <TrashIcon className="size-5 text-white" />
           </button>
         </div>
       ))}
-      <div className="flex flex-between mt-4">
+      <div className="flex-between mt-4 flex">
         <button
           type="button"
           onClick={handleAddFields}
-          className="p-2 rounded-full hover:bg-green-500/30 focus:outline-none"
+          className="rounded-full p-2 hover:bg-green-500/30 focus:outline-none"
         >
-          <PlusCircleIcon className="h-8 w-8 text-white" />
+          <PlusCircleIcon className="size-8 text-white" />
         </button>
         <button
           type="submit"
-          className="green_gradient cursor-pointer font-inter text-md"
+          className="green_gradient cursor-pointer font-inter text-base"
         >
           Update
         </button>

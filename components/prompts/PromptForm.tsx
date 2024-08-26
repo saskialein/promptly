@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Dispatch, FormEvent, SetStateAction } from "react";
 
-type FormProps = {
+type PromptFormProps = {
   type: string;
   post: {
     prompt: string;
@@ -12,13 +12,13 @@ type FormProps = {
   submitting: boolean;
 };
 
-export default function Form({
+export default function PromptForm({
   type,
   post,
   setPost,
   handleSubmit,
   submitting,
-}: FormProps) {
+}: PromptFormProps) {
   return (
     <section className="flex-start w-full max-w-full flex-col">
       <h1 className="head_text text-left">
@@ -34,7 +34,7 @@ export default function Form({
         className="glassmorphism mt-10 flex w-full max-w-2xl flex-col gap-7"
       >
         <label>
-          <span className="font-satoshi text-base font-semibold text-gray-700 dark:text-gray-400">
+          <span className="font-syne text-base font-semibold text-gray-700 dark:text-gray-400">
             Your AI Prompt
           </span>
           <textarea
@@ -46,7 +46,7 @@ export default function Form({
           />
         </label>
         <label>
-          <span className="font-satoshi text-base font-semibold text-gray-700 dark:text-gray-400">
+          <span className="font-syne text-base font-semibold text-gray-700 dark:text-gray-400">
             Tag{" "}
             <span className="font-normal">
               (#product, #webdevelopment, #idea)

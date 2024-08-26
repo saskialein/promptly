@@ -1,5 +1,5 @@
-import Feed from "@components/Feed";
-import Chat from "@components/Chat";
+import Chat from "@components/chat/Chat";
+import Feed from "@components/prompts/Feed";
 
 export default function Home() {
   return (

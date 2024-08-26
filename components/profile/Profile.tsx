@@ -1,10 +1,10 @@
 'use client'
 
+import { Prompt, PromptList } from '@components/prompts/Feed'
+import Modal from '@components/ui/Modal'
 import React, { useState } from 'react'
-import PromptCard from './PromptCard'
-import { Prompt, PromptList } from './Feed'
-import Modal from './Modal'
 import { ApiKeysForm } from './APIKeysForm'
+import PromptCard from '@components/prompts/PromptCard'
 
 export type ProfileProps = {
   name: string | null
@@ -34,7 +34,7 @@ export default function Profile({
       </h1>
 
       <p className="desc text-left">{desc}</p>
-      <div className="flex justify-end space-x-4 mt-4">
+      <div className="mt-4 flex justify-end space-x-4">
         {handleDeleteAccount && (
           <button onClick={handleDeleteAccount} className="delete_btn">
             Delete Profile

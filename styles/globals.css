@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -49,12 +49,18 @@
   }
 }
 
+/* .font_syne {
+  font-family: "Syne", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+} */
+
 /* Tailwind Styles */
 
 .app {
-  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6 mb-8;
 }
-
 
 .main_btn {
   @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all text-center text-sm font-inter flex items-center justify-center;
@@ -96,12 +102,16 @@
   @apply bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 bg-clip-text text-transparent;
 }
 
+.hover\:purple_gradient:hover {
+  @apply bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 bg-clip-text text-transparent font-bold;
+}
+
 .desc {
   @apply mt-5 text-lg text-gray-600 dark:text-gray-400 sm:text-xl max-w-2xl;
 }
 
 .search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-syne pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
 }
 
 .copy_btn {
@@ -140,7 +150,7 @@
 
 /* Nav Component */
 .logo_text {
-  @apply max-sm:hidden font-satoshi font-semibold text-xl text-black dark:text-white tracking-wide;
+  @apply max-sm:hidden font-syne font-semibold text-2xl text-black dark:text-white tracking-wide;
 }
 
 .dropdown {
@@ -148,7 +158,7 @@
 }
 
 .dropdown_link {
-  @apply text-sm font-inter text-gray-700 hover:text-gray-500 font-medium;
+  @apply text-sm font-syne text-gray-700 hover:text-gray-500 font-medium;
 }
 
 /* PromptCard Component */
@@ -170,4 +180,21 @@
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+.small_llm_provider_button {
+  @apply rounded-full bg-white p-2 shadow-md hover:bg-gray-100 focus:outline-none;
+}
+
+.small_llm_provider_logo {
+  width: 26px;
+  height: 26px;
+}
+
+.inline_code {
+  @apply bg-gray-800 text-yellow-400 p-1 rounded-md font-mono;
+}
+
+.code_block {
+  @apply bg-gray-900 text-white p-3 rounded-lg overflow-x-auto m-2 font-mono;
 }

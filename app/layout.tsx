@@ -1,17 +1,17 @@
-import Nav from "@components/Nav";
-import Provider from "@components/Provider";
-import "@styles/globals.css";
-import { ReactNode } from "react";
+import Provider from '@components/provider/Provider'
+import Nav from '@components/ui/Nav'
+import '@styles/globals.css'
+import { ReactNode } from 'react'
 
 export const metadata = {
-  title: "Promptly",
-  description: "Search & Share AI Prompts",
-};
+  title: 'Promptly',
+  description: 'Search & Share AI Prompts',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: ReactNode;
+  children: ReactNode
 }>) {
   return (
     <html lang="en">
@@ -22,6 +22,7 @@ export default function RootLayout({
           type="image/svg"
           sizes="32x32"
         />
+         
       </head>
       <body
         className="bg-white dark:bg-slate-950"
@@ -38,5 +39,5 @@ export default function RootLayout({
         </Provider>
       </body>
     </html>
-  );
+  )
 }

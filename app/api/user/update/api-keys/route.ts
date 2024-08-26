@@ -41,7 +41,7 @@ export const PATCH = async (req: Request) => {
 
     await user.save()
 
-    return new Response(JSON.stringify(user), {
+    return new Response("User updated successfully.", {
       status: 200,
     })
   } catch (error) {

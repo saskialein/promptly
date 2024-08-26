@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from 'next/link'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import {
   signIn,
   signOut,
@@ -10,29 +10,30 @@ import {
   getProviders,
   LiteralUnion,
   ClientSafeProvider,
-} from "next-auth/react";
-import { BuiltInProviderType } from "next-auth/providers";
-import { useRouter } from "next/navigation";
+} from 'next-auth/react'
+import { BuiltInProviderType } from 'next-auth/providers'
+import { useRouter } from 'next/navigation'
 
-const Nav = () => {
-  const { data: session } = useSession();
-  const router = useRouter();
+export default function Nav() {
+  const { data: session } = useSession()
+  const router = useRouter()
 
   const [providers, setProviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
-  > | null>(null);
-  const [toggleDropdown, setToggleDropdown] = useState(false);
+  > | null>(null)
+  const [toggleDropdown, setToggleDropdown] = useState(false)
 
   useEffect(() => {
-    (async () => {
-      const res = await getProviders();
-      setProviders(res);
-    })();
-  }, []);
+    ;(async () => {
+      const res = await getProviders()
+      setProviders(res)
+    })()
+  }, [])
 
   return (
-    <nav className="flex-between mb-16 w-full pt-3">
+    // <nav className="flex-between mb-16 w-full pt-3">
+    <nav className="mb-16 flex w-full items-center justify-between pt-3">
       <Link href="/" className="flex-center flex gap-2">
         <Image
           src="/assets/images/logo.svg"
@@ -44,19 +45,28 @@ const Nav = () => {
         <p className="logo_text">Promptly</p>
       </Link>
 
+      <div className="hidden flex-1 justify-center sm:flex">
+        <Link href="/create-prompt" className="main_btn">
+          Create Prompt
+        </Link>
+      </div>
+
       {/* Desktop Navigation */}
-      <div className="hidden sm:flex">
+      {/* <div className="hidden sm:flex"> */}
+      <div className="hidden items-center gap-3 sm:flex md:gap-5">
+      
         {session?.user ? (
-          <div className="flex gap-3 md:gap-5">
-            <Link href="/create-prompt" className="main_btn">
+          <>
+          {/* // <div className="flex gap-3 md:gap-5"> */}
+            {/* <Link href="/create-prompt" className="main_btn">
               Create Prompt
-            </Link>
+            </Link> */}
 
             <button
               type="button"
               onClick={() => {
-                signOut();
-                router.push("/");
+                signOut()
+                router.push('/')
               }}
               className="outline_btn"
             >
@@ -65,14 +75,15 @@ const Nav = () => {
 
             <Link href="/profile">
               <Image
-                src={session?.user.image || ""}
+                src={session?.user.image || ''}
                 width={37}
                 height={37}
                 className="rounded-full"
                 alt="profile"
               />
             </Link>
-          </div>
+          {/* // </div> */}
+            </>
         ) : (
           <>
             {providers &&
@@ -81,7 +92,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => {
-                    signIn(provider.id);
+                    signIn(provider.id)
                   }}
                   className="main_btn"
                 >
@@ -97,7 +108,7 @@ const Nav = () => {
         {session?.user ? (
           <div className="flex">
             <Image
-              src={session?.user.image || ""}
+              src={session?.user.image || ''}
               width={37}
               height={37}
               className="rounded-full"
@@ -124,9 +135,9 @@ const Nav = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    setToggleDropdown(false);
-                    signOut();
-                    router.push("/");
+                    setToggleDropdown(false)
+                    signOut()
+                    router.push('/')
                   }}
                   className="main_btn mt-5 w-full"
                 >
@@ -143,7 +154,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => {
-                    signIn(provider.id);
+                    signIn(provider.id)
                   }}
                   className="main_btn"
                 >
@@ -154,7 +165,5 @@ const Nav = () => {
         )}
       </div>
     </nav>
-  );
-};
-
-export default Nav;
+  )
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import Form from "@components/Form";
+import PromptForm from "@components/prompts/PromptForm";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
@@ -54,7 +54,7 @@ export default function EditPrompt() {
   };
 
   return (
-    <Form
+    <PromptForm
       type="Edit"
       post={post}
       setPost={setPost}

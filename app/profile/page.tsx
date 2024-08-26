@@ -1,7 +1,7 @@
 "use client";
 
-import { Prompt, PromptList } from "@components/Feed";
-import Profile from "@components/Profile";
+import Profile from "@components/profile/Profile";
+import { Prompt, PromptList } from "@components/prompts/Feed";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 

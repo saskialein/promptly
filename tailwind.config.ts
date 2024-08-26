@@ -10,8 +10,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
+        sans: ['"Inter"', 'sans-serif'],
         satoshi: ['Satoshi', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
+        syne: ["Syne", 'sans-serif']
       },
       colors: {
         'primary-orange': '#FF5722',
