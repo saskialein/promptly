@@ -24,7 +24,7 @@ export type PromptList = Prompt[];
 
 const PromptCardList = ({ data, handleTagClick }: PromptCardListProps) => {
   return (
-    <div className="prompt_layout mt-16">
+    <div className="prompt_layout">
       {data.map((post) => (
         <PromptCard
           key={post._id}
