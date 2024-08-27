@@ -1,12 +1,11 @@
 'use client'
 
 import PromptForm from '@components/prompts/PromptForm'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { FormEvent, Suspense, useEffect, useState } from 'react'
 
 export default function EditPrompt() {
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   const [submitting, setSubmitting] = useState(false)
   const [post, setPost] = useState({
@@ -16,8 +15,9 @@ export default function EditPrompt() {
   const [promptId, setPromptId] = useState<string | null>(null)
 
   useEffect(() => {
-    setPromptId(searchParams.get('id'))
-  }, [searchParams])
+    const params = new URLSearchParams(window.location.search)
+    setPromptId(params.get('id'))
+  }, [])
 
   useEffect(() => {
     const getPromptDetails = async () => {
@@ -60,14 +60,12 @@ export default function EditPrompt() {
   }
 
   return (
-    <Suspense fallback="Loading...">
-      <PromptForm
-        type="Edit"
-        post={post}
-        setPost={setPost}
-        handleSubmit={updatePrompt}
-        submitting={submitting}
-      />
-    </Suspense>
+    <PromptForm
+      type="Edit"
+      post={post}
+      setPost={setPost}
+      handleSubmit={updatePrompt}
+      submitting={submitting}
+    />
   )
 }
