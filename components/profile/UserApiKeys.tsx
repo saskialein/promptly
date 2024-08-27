@@ -23,7 +23,7 @@ export default function UserApiKeys() {
   }, [])
 
   if (!apiKeys || apiKeys.length == 0) {
-    return <p className="mt-2 text-sm text-gray-700 dark:text-gray-300 italic">Add your API keys to start chatting.</p>
+    return <p className="mt-2 text-sm italic text-gray-700 dark:text-gray-300">Add your API keys to start chatting.</p>
   }
 
   return (
