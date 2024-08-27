@@ -2,23 +2,27 @@
 
 import PromptForm from '@components/prompts/PromptForm'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { FormEvent, Suspense, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 
 export default function EditPrompt() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const promptId = searchParams.get('id')
 
   const [submitting, setSubmitting] = useState(false)
   const [post, setPost] = useState({
     prompt: '',
     tag: '',
   })
+  const [promptId, setPromptId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setPromptId(searchParams.get('id'));
+  }, [searchParams]);
 
   useEffect(() => {
     const getPromptDetails = async () => {
       if (!promptId) return
-      
+
       const response = await fetch(`/api/prompt/${promptId}`)
       const data = await response.json()
 
@@ -56,14 +60,12 @@ export default function EditPrompt() {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <PromptForm
-        type="Edit"
-        post={post}
-        setPost={setPost}
-        handleSubmit={updatePrompt}
-        submitting={submitting}
-      />
-    </Suspense>
+    <PromptForm
+      type="Edit"
+      post={post}
+      setPost={setPost}
+      handleSubmit={updatePrompt}
+      submitting={submitting}
+    />
   )
 }
