@@ -83,7 +83,7 @@ export default function PromptCard({
       <p className="my-4 font-syne text-sm text-gray-700 dark:text-gray-300">
         {post?.prompt}
       </p>
-      <div className="flex flex-between">
+      <div className="flex-between flex">
         <p
           className="orange_gradient cursor-pointer font-inter text-sm"
           onClick={() => handleTagClick && handleTagClick(post?.tag)}
@@ -91,7 +91,7 @@ export default function PromptCard({
           {post?.tag}
         </p>
         <div
-          className="relative group"
+          className="group relative"
           onMouseEnter={() => setTooltipVisible(true)}
           onMouseLeave={() => setTooltipVisible(false)}
         >
@@ -99,7 +99,7 @@ export default function PromptCard({
             <ChatBubbleOvalLeftEllipsisIcon className="size-6 text-white" />
           </button>
           {tooltipVisible && (
-            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-full hidden w-max rounded orange_gradient text-sm group-hover:block whitespace-nowrap">
+            <div className="orange_gradient absolute bottom-full left-1/2 hidden w-max -translate-x-1/2 whitespace-nowrap rounded text-sm group-hover:block">
               Paste prompt into chat
             </div>
           )}

@@ -24,7 +24,7 @@ export default function UserApiKeys() {
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full text-sm divide-y divide-gray-200">
+      <table className="min-w-full divide-y divide-gray-200 text-sm">
         <thead>
           <tr>
             <th className="px-4 py-2 text-left font-medium text-gray-500 dark:text-gray-300">
@@ -38,10 +38,10 @@ export default function UserApiKeys() {
         <tbody className="divide-y divide-gray-200">
           {apiKeys.map((key: FrontentApiKey) => (
             <tr key={key.provider}>
-              <td className="px-4 py-2 whitespace-nowrap font-bold text-gray-900 dark:text-white">
+              <td className="whitespace-nowrap px-4 py-2 font-bold text-gray-900 dark:text-white">
                 {providers[key.provider as LLMProvider].displayName}
               </td>
-              <td className="px-4 py-2 whitespace-nowrap text-gray-500 dark:text-gray-300 font-mono">
+              <td className="whitespace-nowrap px-4 py-2 font-mono text-gray-500 dark:text-gray-300">
                 {key.sensitive_id}
               </td>
             </tr>

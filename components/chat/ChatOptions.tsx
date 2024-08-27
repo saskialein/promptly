@@ -81,8 +81,8 @@ export default function ChatOptions({
         <p className="text-center text-gray-600 dark:text-gray-400">
           You don&apos;t have any API keys set up yet.
         </p>
-        <button onClick={() => router.push('/profile')} className="bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 rounded-full p-0.5">
-          <span className="flex w-full bg-rose-50 dark:bg-gray-900 text-black dark:text-white rounded-full py-1 px-5">
+        <button onClick={() => router.push('/profile')} className="rounded-full bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 p-0.5">
+          <span className="flex w-full rounded-full bg-rose-50 px-5 py-1 text-black dark:bg-gray-900 dark:text-white">
             Add API Keys
           </span>
         </button>

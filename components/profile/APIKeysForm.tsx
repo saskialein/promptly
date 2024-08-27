@@ -54,7 +54,7 @@ export function ApiKeysForm({ closeModal }: ApiKeysFormProps) {
 
   return (
     <div>
-      <h4 className="text-lg text-gray-500 dark:text-gray-300 mb-2">Add or Update Keys</h4>
+      <h4 className="mb-2 text-lg text-gray-500 dark:text-gray-300">Add or Update Keys</h4>
       <form onSubmit={handleSubmit} className="space-y-2">
         {apiKeys.map((field, index) => (
           <div key={index} className="flex-center flex space-x-2">
