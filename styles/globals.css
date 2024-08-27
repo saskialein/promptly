@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
 @tailwind base;
 @tailwind components;
@@ -35,7 +35,7 @@
     radial-gradient(at 33% 50%, hsla(280, 67%, 73%, 1) 0px, transparent 50%),
     radial-gradient(at 79% 53%, hsla(330, 70%, 79%, 1) 0px, transparent 50%);
   position: absolute;
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   filter: blur(100px) saturate(150%);
@@ -49,29 +49,15 @@
   }
 }
 
-/* .font_syne {
-  font-family: "Syne", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-} */
-
 /* Tailwind Styles */
 
 .app {
   @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6 mb-8;
 }
 
-.main_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all text-center text-sm font-inter flex items-center justify-center;
-
-  /* Light mode styles */
-  @apply dark:bg-gradient-to-r dark:from-purple-500 dark:via-violet-500 dark:to-pink-500 dark:bg-clip-border dark:text-white;
-}
-
-/* Dark mode specific styles */
-.dark .main_btn {
-  @apply bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 bg-clip-border text-transparent border-none;
+.main_gradient_btn {
+  @apply rounded-full py-1.5 px-5 text-white transition-all text-center text-sm font-inter flex items-center justify-center bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 bg-clip-border border-none;
+  @apply hover:brightness-125 hover:shadow-md;
 }
 
 .outline_btn {
@@ -111,7 +97,7 @@
 }
 
 .search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-syne pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-syne pl-5 pr-12 text-base shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
 }
 
 .copy_btn {
@@ -132,7 +118,7 @@
 }
 
 .chat {
-  @apply w-full flex justify-center items-center flex-col gap-0 ;
+  @apply w-full flex justify-center items-center flex-col gap-0;
 }
 
 /* Form Component */

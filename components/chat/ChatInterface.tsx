@@ -1,6 +1,7 @@
 'use client'
 
 import { LLMProvider } from '@app/api/chat/[llm]/route'
+import { usePrompt } from '@context/PromptContext'
 import { useChat } from 'ai/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useRef } from 'react'
@@ -12,9 +13,16 @@ type ChatInterfaceProps = {
 }
 
 export default function ChatInterface({ provider }: ChatInterfaceProps) {
-  const { messages, input, handleInputChange, handleSubmit, error } = useChat({
+  const { messages, input, setInput, handleInputChange, handleSubmit, error } = useChat({
     api: `/api/chat/${provider}`,
   })
+  const { prompt } = usePrompt()
+
+  useEffect(() => {
+    if (prompt || prompt.length > 1) {
+      setInput(prompt)
+    }
+  }, [prompt])
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
 

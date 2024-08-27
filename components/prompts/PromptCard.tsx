@@ -1,16 +1,18 @@
-"use client";
-import Image from "next/image";
-import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
-import { Prompt } from "./Feed";
+'use client'
+import Image from 'next/image'
+import { useSession } from 'next-auth/react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { Prompt } from './Feed'
+import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
+import { usePrompt } from '@context/PromptContext'
 
 export type PromptCardProps = {
-  post: Prompt;
-  handleTagClick?: (tag: string) => void;
-  handleEdit?: (post: Prompt) => void;
-  handleDelete?: (post: Prompt) => void;
-};
+  post: Prompt
+  handleTagClick?: (tag: string) => void
+  handleEdit?: (post: Prompt) => void
+  handleDelete?: (post: Prompt) => void
+}
 
 export default function PromptCard({
   post,
@@ -18,25 +20,28 @@ export default function PromptCard({
   handleEdit,
   handleDelete,
 }: PromptCardProps) {
-  const { data: session } = useSession();
-  const pathName = usePathname();
-  const router = useRouter();
+  const { data: session } = useSession()
+  const pathName = usePathname()
+  const router = useRouter()
+  const { setPrompt } = usePrompt()
 
-  const [copied, setCopied] = useState("");
+  const [copied, setCopied] = useState('')
+  const [tooltipVisible, setTooltipVisible] = useState(false)
 
   const handleProfileClick = () => {
-    console.log(post);
-
-    if (post.creator._id === session?.user.id) return router.push("/profile");
-
-    router.push(`/profile/${post?.creator?._id}?name=${post.creator.username}`);
-  };
+    if (post.creator._id === session?.user.id) return router.push('/profile')
+    router.push(`/profile/${post?.creator?._id}?name=${post.creator.username}`)
+  }
 
   const handleCopy = () => {
-    setCopied(post.prompt);
-    navigator.clipboard.writeText(post.prompt);
-    setTimeout(() => setCopied(""), 3000);
-  };
+    setCopied(post.prompt)
+    navigator.clipboard.writeText(post.prompt)
+    setTimeout(() => setCopied(''), 3000)
+  }
+
+  const handleBubbleClick = (post: Prompt) => {
+    setPrompt(post.prompt)
+  }
 
   return (
     <div className="prompt_card">
@@ -47,7 +52,7 @@ export default function PromptCard({
         >
           {/* TODO: Fallback img */}
           <Image
-            src={post?.creator?.image || ""}
+            src={post?.creator?.image || ''}
             alt="user-image"
             width={40}
             height={40}
@@ -57,17 +62,17 @@ export default function PromptCard({
             <h3 className="font-syne font-semibold text-gray-900 dark:text-gray-300">
               {post?.creator?.username}
             </h3>
-            <p className="font-inter text-sm text-gray-500 ">
+            {/* <p className="font-inter text-sm text-gray-500 ">
               {post?.creator?.email}
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
               copied === post?.prompt
-                ? "/assets/icons/tick.svg"
-                : "/assets/icons/copy.svg"
+                ? '/assets/icons/tick.svg'
+                : '/assets/icons/copy.svg'
             }
             width={15}
             height={15}
@@ -78,13 +83,29 @@ export default function PromptCard({
       <p className="my-4 font-syne text-sm text-gray-700 dark:text-gray-300">
         {post?.prompt}
       </p>
-      <p
-        className="orange_gradient cursor-pointer font-inter text-sm"
-        onClick={() => handleTagClick && handleTagClick(post?.tag)}
-      >
-        {post?.tag}
-      </p>
-      {session?.user.id === post?.creator?._id && pathName === "/profile" && (
+      <div className="flex flex-between">
+        <p
+          className="orange_gradient cursor-pointer font-inter text-sm"
+          onClick={() => handleTagClick && handleTagClick(post?.tag)}
+        >
+          {post?.tag}
+        </p>
+        <div
+          className="relative group"
+          onMouseEnter={() => setTooltipVisible(true)}
+          onMouseLeave={() => setTooltipVisible(false)}
+        >
+          <button onClick={() => handleBubbleClick(post)}>
+            <ChatBubbleOvalLeftEllipsisIcon className="size-6 text-white" />
+          </button>
+          {tooltipVisible && (
+            <div className="absolute left-1/2 transform -translate-x-1/2 bottom-full hidden w-max rounded orange_gradient text-sm group-hover:block whitespace-nowrap">
+              Paste prompt into chat
+            </div>
+          )}
+        </div>
+      </div>
+      {session?.user.id === post?.creator?._id && pathName === '/profile' && (
         <div className="flex-end mt-5 gap-4 border-t border-gray-100 pt-3">
           <p
             className="green_gradient cursor-pointer font-inter text-sm"
@@ -101,5 +122,5 @@ export default function PromptCard({
         </div>
       )}
     </div>
-  );
+  )
 }

@@ -46,7 +46,7 @@ export default function Nav() {
       {session?.user ? (
         <>
           <div className="hidden flex-1 justify-center sm:flex">
-            <Link href="/create-prompt" className="main_btn">
+            <Link href="/create-prompt" className="main_gradient_btn">
               Create Prompt
             </Link>
           </div>
@@ -85,7 +85,7 @@ export default function Nav() {
                 onClick={() => {
                   signIn(provider.id)
                 }}
-                className="main_btn"
+                className="main_gradient_btn"
               >
                 Sign in
               </button>
@@ -129,7 +129,7 @@ export default function Nav() {
                     signOut()
                     router.push('/')
                   }}
-                  className="main_btn mt-5 w-full"
+                  className="outline_btn mt-5 w-full"
                 >
                   Sign Out
                 </button>
@@ -146,7 +146,7 @@ export default function Nav() {
                   onClick={() => {
                     signIn(provider.id)
                   }}
-                  className="main_btn"
+                  className="main_gradient_btn"
                 >
                   Sign in
                 </button>

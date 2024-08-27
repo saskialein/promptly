@@ -1,7 +1,7 @@
-import Provider from '@components/provider/Provider'
 import Nav from '@components/ui/Nav'
 import '@styles/globals.css'
 import { ReactNode } from 'react'
+import { Providers } from './providers'
 
 export const metadata = {
   title: 'Promptly',
@@ -28,7 +28,7 @@ export default function RootLayout({
         className="bg-white dark:bg-slate-950"
         suppressHydrationWarning={true}
       >
-        <Provider>
+        <Providers>
           <div className="main">
             <div className="gradient" />
           </div>
@@ -36,7 +36,7 @@ export default function RootLayout({
             <Nav />
             {children}
           </main>
-        </Provider>
+        </Providers>
       </body>
     </html>
   )

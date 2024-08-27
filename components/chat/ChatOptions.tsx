@@ -33,17 +33,17 @@ export const providers = {
     model: 'llama3-70b',
   },
   google: {
-    displayName: "Google",
-    model: "gemini-1.5-pro"
+    displayName: 'Google',
+    model: 'gemini-1.5-pro',
   },
   cohere: {
-    displayName: "Cohere",
-    model: "command-r-plus"
+    displayName: 'Cohere',
+    model: 'command-r-plus',
   },
   mistral: {
-    displayName: "Mistral",
-    model: "mistral-large-latest"
-  }
+    displayName: 'Mistral',
+    model: 'mistral-large-latest',
+  },
 }
 
 export default function ChatOptions({
@@ -77,15 +77,14 @@ export default function ChatOptions({
 
   if (!apiKeys?.length) {
     return (
-      <div className="mt-10 flex flex-col items-center justify-center">
+      <div className="mt-10 flex flex-col items-center justify-center gap-2">
         <p className="text-center text-gray-600 dark:text-gray-400">
           You don&apos;t have any API keys set up yet.
         </p>
-        <button
-          onClick={() => router.push('/profile')}
-          className="main_btn mt-2"
-        >
-          Add API Keys
+        <button onClick={() => router.push('/profile')} className="bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 rounded-full p-0.5">
+          <span className="flex w-full bg-rose-50 dark:bg-gray-900 text-black dark:text-white rounded-full py-1 px-5">
+            Add API Keys
+          </span>
         </button>
       </div>
     )
@@ -95,7 +94,7 @@ export default function ChatOptions({
     <div className="my-10 flex w-full flex-row  items-center justify-center">
       {apiKeys.map((key, idx) => (
         <div
-          className="group  relative -mr-4"
+          className="group relative -mr-4"
           key={key.provider}
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
