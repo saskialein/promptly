@@ -12,11 +12,9 @@ import {
   ClientSafeProvider,
 } from 'next-auth/react'
 import { BuiltInProviderType } from 'next-auth/providers'
-import { useRouter } from 'next/navigation'
 
 export default function Nav() {
   const { data: session } = useSession()
-  const router = useRouter()
 
   const [providers, setProviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
@@ -56,8 +54,7 @@ export default function Nav() {
             <button
               type="button"
               onClick={() => {
-                signOut()
-                router.push('/')
+                signOut({ callbackUrl: '/' })
               }}
               className="outline_btn"
             >
@@ -126,8 +123,7 @@ export default function Nav() {
                   type="button"
                   onClick={() => {
                     setToggleDropdown(false)
-                    signOut()
-                    router.push('/')
+                    signOut({ callbackUrl: '/' })
                   }}
                   className="outline_btn mt-5 w-full"
                 >
