@@ -9,7 +9,17 @@ export type ApiKey = {
 }
 
 const maskApiKey = (key: string) => {
-  return key.slice(0, 6) + key.slice(6, -4).replace(/./g, '*') + key.slice(-4)
+  const visibleStart = key.slice(0, 6);
+  const visibleEnd = key.slice(-4);
+
+  // Calculate the number of characters to mask
+  const totalMaskedChars = key.length - visibleStart.length - visibleEnd.length;
+  
+  // Ensure the masked portion doesn't exceed 30 characters
+  const maxMaskedChars = Math.min(totalMaskedChars, 30);
+  const maskedPortion = '*'.repeat(maxMaskedChars);
+
+  return visibleStart + maskedPortion + visibleEnd;
 }
 
 export const GET = async () => {

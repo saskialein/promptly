@@ -5,6 +5,7 @@ import Modal from '@components/ui/Modal'
 import React, { useState } from 'react'
 import { ApiKeysForm } from './APIKeysForm'
 import PromptCard from '@components/prompts/PromptCard'
+import UserApiKeys from './UserApiKeys'
 
 export type ProfileProps = {
   name: string | null
@@ -48,9 +49,12 @@ export default function Profile({
             <Modal
               isOpen={isModalOpen}
               onClose={() => setModalOpen(false)}
-              title="Add your API Keys"
+              title="Your API Keys"
             >
-              <ApiKeysForm closeModal={() => setModalOpen(false)} />
+              <div className='flex flex-col gap-4'>
+                <UserApiKeys />
+                <ApiKeysForm closeModal={() => setModalOpen(false)} />
+              </div>
             </Modal>
           </>
         )}

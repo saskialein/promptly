@@ -9,9 +9,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import { LLMProvider } from '@app/api/chat/[llm]/route'
+import { useSession } from 'next-auth/react'
 
 export default function Chat() {
   const router = useRouter()
+  const { data: session } = useSession()
+
   const [apiKeys, setApiKeys] = useState([])
   const [selectedProvider, setSelectedProvider] = useState<LLMProvider | null>(
     null,
@@ -36,6 +39,10 @@ export default function Chat() {
   const dropdownVariants = {
     hidden: { opacity: 0, scale: 0.9 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+  }
+
+  if (!session) {
+    return null
   }
 
   return (

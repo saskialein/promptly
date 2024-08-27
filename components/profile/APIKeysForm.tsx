@@ -53,54 +53,59 @@ export function ApiKeysForm({ closeModal }: ApiKeysFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {apiKeys.map((field, index) => (
-        <div key={index} className="flex-center flex space-x-4">
-          <select
-            name="provider"
-            value={field.provider}
-            onChange={(event) => handleInputChange(index, event)}
-            className="select_input"
-          >
-            <option value="">Select Provider</option>
+    <div>
+      <h4 className="text-lg text-gray-500 dark:text-gray-300 mb-2">Add or Update Keys</h4>
+      <form onSubmit={handleSubmit} className="space-y-2">
+        {apiKeys.map((field, index) => (
+          <div key={index} className="flex-center flex space-x-2">
+            <select
+              name="provider"
+              value={field.provider}
+              onChange={(event) => handleInputChange(index, event)}
+              className="select_input"
+            >
+              <option value="">Select Provider</option>
 
-            {Object.entries(providers).map(([key, { displayName, model }]) => (
-              <option key={key} value={key}>
-                {displayName} - {model}
-              </option>
-            ))}
-          </select>
-          <input
-            name="apiKey"
-            placeholder="API Key"
-            value={field.apiKey}
-            onChange={(event) => handleInputChange(index, event)}
-            className="form_input"
-          />
+              {Object.entries(providers).map(
+                ([key, { displayName, model }]) => (
+                  <option key={key} value={key}>
+                    {displayName}  ({model})
+                  </option>
+                ),
+              )}
+            </select>
+            <input
+              name="apiKey"
+              placeholder="API Key"
+              value={field.apiKey}
+              onChange={(event) => handleInputChange(index, event)}
+              className="form_input"
+            />
+            <button
+              type="button"
+              onClick={() => handleRemoveFields(index)}
+              className="rounded-full p-2 hover:bg-red-500/30 focus:outline-none"
+            >
+              <TrashIcon className="size-6 text-white" />
+            </button>
+          </div>
+        ))}
+        <div className="flex-between flex">
           <button
             type="button"
-            onClick={() => handleRemoveFields(index)}
-            className="rounded-full p-2 hover:bg-red-500/30 focus:outline-none"
+            onClick={handleAddFields}
+            className="rounded-full p-2 hover:bg-green-500/30 focus:outline-none"
           >
-            <TrashIcon className="size-5 text-white" />
+            <PlusCircleIcon className="size-8 text-white" />
+          </button>
+          <button
+            type="submit"
+            className="green_gradient cursor-pointer font-inter text-base"
+          >
+            Update
           </button>
         </div>
-      ))}
-      <div className="flex-between mt-4 flex">
-        <button
-          type="button"
-          onClick={handleAddFields}
-          className="rounded-full p-2 hover:bg-green-500/30 focus:outline-none"
-        >
-          <PlusCircleIcon className="size-8 text-white" />
-        </button>
-        <button
-          type="submit"
-          className="green_gradient cursor-pointer font-inter text-base"
-        >
-          Update
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
