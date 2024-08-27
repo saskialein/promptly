@@ -2,7 +2,7 @@
 
 import PromptForm from '@components/prompts/PromptForm'
 import { useRouter } from 'next/navigation'
-import { FormEvent, Suspense, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 
 export default function EditPrompt() {
   const router = useRouter()
