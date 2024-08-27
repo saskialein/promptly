@@ -24,8 +24,7 @@ export default function Modal({
         >
           ✕
         </button>
-        
-        <h2 className="mb-4 text-xl font-semibold text-black dark:text-white">
+        <h2 className="font-syne text-xl font-semibold text-gray-700 dark:text-gray-400">
           {title}
         </h2>
         {children}

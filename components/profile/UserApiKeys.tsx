@@ -22,6 +22,10 @@ export default function UserApiKeys() {
     fetchApiKeys()
   }, [])
 
+  if (!apiKeys || apiKeys.length == 0) {
+    return <p className="mt-2 text-sm text-gray-700 dark:text-gray-300 italic">Add your API keys to start chatting.</p>
+  }
+
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full divide-y divide-gray-200 text-sm">
@@ -50,5 +54,4 @@ export default function UserApiKeys() {
       </table>
     </div>
   )
-
 }
