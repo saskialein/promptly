@@ -1,12 +1,19 @@
 import Nav from '@components/ui/Nav'
 import '@styles/globals.css'
-import { inter, syne } from '@/app/ui/fonts';
+import { inter, syne } from '@/app/ui/fonts'
 import { ReactNode } from 'react'
 import { Providers } from './providers'
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: 'Promptly',
+export const metadata: Metadata = {
+  title: { template: '%s | Promptly', default: 'Promptly' },
   description: 'Search & Share AI Prompts',
+  metadataBase: new URL('https://promptly.saskia.dev'),
+  openGraph: {
+    title: "Promptly",
+    description: "Search & Share AI Prompts",
+    url: "https://promptly.saskia.dev"
+  }
 }
 
 export default function RootLayout({
@@ -23,7 +30,6 @@ export default function RootLayout({
           type="image/svg"
           sizes="32x32"
         />
-         
       </head>
       <body
         className={`bg-white dark:bg-slate-950 ${inter.variable} ${syne.variable} antialiased`}
