@@ -96,7 +96,7 @@ export default function PromptCard({
           onMouseLeave={() => setTooltipVisible(false)}
         >
           <button onClick={() => handleBubbleClick(post)}>
-            <ChatBubbleOvalLeftEllipsisIcon className="size-6 text-white" />
+            <ChatBubbleOvalLeftEllipsisIcon className="size-6 dark:text-white" />
           </button>
           {tooltipVisible && (
             <div className="orange_gradient absolute bottom-full left-1/2 hidden w-max -translate-x-1/2 whitespace-nowrap rounded text-sm group-hover:block">
