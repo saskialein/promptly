@@ -3,6 +3,7 @@
 import { LLMProvider } from '@app/api/chat/[llm]/route'
 import { providers } from '@components/chat/ChatOptions'
 import { useEffect, useState } from 'react'
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 
 type FrontentApiKey = {
   provider: string
@@ -11,6 +12,7 @@ type FrontentApiKey = {
 
 export default function UserApiKeys() {
   const [apiKeys, setApiKeys] = useState([])
+  const [tooltipVisible, setTooltipVisible] = useState(false)
 
   const fetchApiKeys = async () => {
     const response = await fetch('/api/user/api-keys')
@@ -23,7 +25,27 @@ export default function UserApiKeys() {
   }, [])
 
   if (!apiKeys || apiKeys.length == 0) {
-    return <p className="mt-2 text-sm italic text-gray-700 dark:text-gray-300">Add your API keys to start chatting.</p>
+    return (
+      <div className="mt-2 flex items-center gap-2">
+        <p className="text-sm italic text-gray-700 dark:text-gray-300">
+          Add your API keys to start chatting.
+        </p>
+        <div
+          className="group relative flex items-center"
+          onMouseEnter={() => setTooltipVisible(true)}
+          onMouseLeave={() => setTooltipVisible(false)}
+        >
+          <button type="button">
+            <QuestionMarkCircleIcon className="size-6 dark:text-white" />
+          </button>
+          {tooltipVisible && (
+            <div className="green_gradient absolute bottom-full left-1/2 hidden w-max -translate-x-1/2 whitespace-nowrap rounded text-sm group-hover:block">
+              Help coming soon!
+            </div>
+          )}
+        </div>
+      </div>
+    )
   }
 
   return (
