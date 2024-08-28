@@ -12,8 +12,8 @@ const config: Config = {
       fontFamily: {
         sans: ['"Inter"', 'sans-serif'],
         satoshi: ['Satoshi', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
-        syne: ["Syne", 'sans-serif']
+        inter: ['var(--font-inter)', 'sans-serif'],
+        syne: ["var(--font-syne)", 'sans-serif']
       },
       colors: {
         'primary-orange': '#FF5722',

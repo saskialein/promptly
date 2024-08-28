@@ -1,5 +1,6 @@
 import Nav from '@components/ui/Nav'
 import '@styles/globals.css'
+import { inter, syne } from '@/app/ui/fonts';
 import { ReactNode } from 'react'
 import { Providers } from './providers'
 
@@ -25,7 +26,7 @@ export default function RootLayout({
          
       </head>
       <body
-        className="bg-white dark:bg-slate-950"
+        className={`bg-white dark:bg-slate-950 ${inter.variable} ${syne.variable} antialiased`}
         suppressHydrationWarning={true}
       >
         <Providers>

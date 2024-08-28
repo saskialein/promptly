@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,7 +95,7 @@
 }
 
 .search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-syne pl-5 pr-12 text-base shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 pl-5 pr-12 text-base shadow-lg font-syne font-medium focus:border-black focus:outline-none focus:ring-0;
 }
 
 .copy_btn {
@@ -118,7 +116,7 @@
 }
 
 .chat {
-  @apply w-full flex justify-center items-center flex-col gap-0;
+  @apply w-full flex justify-center items-center flex-col  max-w-full gap-0;
 }
 
 /* Form Component */
@@ -144,7 +142,7 @@
 }
 
 .dropdown_link {
-  @apply text-sm font-syne text-gray-700 hover:text-gray-500 font-medium;
+  @apply font-syne text-sm text-gray-700 hover:text-gray-500 font-medium;
 }
 
 /* PromptCard Component */
@@ -182,5 +180,5 @@
 }
 
 .code_block {
-  @apply bg-gray-900 text-white p-3 rounded-lg overflow-x-auto m-2 font-mono;
+  @apply bg-gray-900 text-white p-3 rounded-lg overflow-x-auto m-2 font-mono break-words;
 }
