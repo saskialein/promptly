@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import Link from 'next/link'
+import { Dispatch, FormEvent, SetStateAction } from 'react'
 
 type PromptFormProps = {
-  type: string;
+  type: string
   post: {
-    prompt: string;
-    tag: string;
-  };
-  setPost: Dispatch<SetStateAction<{ prompt: string; tag: string }>>;
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  submitting: boolean;
-};
+    prompt: string
+    tag: string
+  }
+  setPost: Dispatch<SetStateAction<{ prompt: string; tag: string }>>
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+  submitting: boolean
+}
 
 export default function PromptForm({
   type,
@@ -47,7 +47,7 @@ export default function PromptForm({
         </label>
         <label>
           <span className="font-syne text-base font-semibold text-gray-700 dark:text-gray-400">
-            Tag{" "}
+            Tag{' '}
             <span className="font-normal">
               (#product, #webdevelopment, #idea)
             </span>
@@ -74,5 +74,5 @@ export default function PromptForm({
         </div>
       </form>
     </section>
-  );
+  )
 }
