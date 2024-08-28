@@ -1,7 +1,7 @@
-import { connectToDB } from "@utils/database";
-import NextAuth, { Account, AuthOptions, Profile, Session } from "next-auth";
-import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
-import User from "@models/user";
+import NextAuth, { AuthOptions, Session } from 'next-auth'
+import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google'
+import User from '@models/user'
+import { findOrCreateUser } from '@app/lib/auth'
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -14,47 +14,23 @@ export const authOptions: AuthOptions = {
     async session({ session }: { session: Session }) {
       const sessionUser = await User.findOne({
         email: session.user?.email,
-      });
+      })
 
-      session.user.id = sessionUser._id.toString();
+      session.user.id = sessionUser._id.toString()
 
-      return session;
+      return session
     },
-    async signIn({
-      account,
-      profile,
-    }: {
-      account: Account | null;
-      profile?: Profile | null;
-    }) {
+    async signIn({ profile }) {
       try {
-        await connectToDB();
-
-        const userExists = await User.findOne({
-          email: profile?.email,
-        });
-
-        if (!userExists) {
-          await User.create({
-            email: profile?.email,
-            username: profile?.name?.replace(" ", "").toLowerCase(),
-            image: (profile as GoogleProfile)?.picture,
-            apiKeys: []
-          });
-        }
-
-        if (account?.provider === "google") {
-          return (profile as GoogleProfile)?.email_verified;
-        }
-        return true;
+        return await findOrCreateUser(profile as GoogleProfile)
       } catch (error) {
-        console.error("Error checking if user exists: ", error);
-        return false;
+        console.error('Sign-in error:', error)
+        return false
       }
     },
   },
-};
+}
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions)
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }

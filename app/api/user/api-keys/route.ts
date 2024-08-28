@@ -1,6 +1,6 @@
 import { authOptions } from '@app/api/auth/[...nextauth]/route'
+import { connectToDB } from '@app/lib/db'
 import User from '@models/user'
-import { connectToDB } from '@utils/database'
 import { getServerSession } from 'next-auth'
 
 export type ApiKey = {

@@ -6,9 +6,9 @@ import { createMistral } from '@ai-sdk/mistral'
 import { authOptions } from '@app/api/auth/[...nextauth]/route'
 import { ApiKey } from '@app/api/user/api-keys/route'
 import User from '@models/user'
-import { connectToDB } from '@utils/database'
 import { convertToCoreMessages, streamText } from 'ai'
 import { getServerSession } from 'next-auth'
+import { connectToDB } from '@app/lib/db'
 
 export type LLMProvider =
   | 'openai'

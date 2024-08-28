@@ -1,8 +1,8 @@
-import { connectToDB } from "@utils/database";
 import User from "@models/user";
 import Prompt from "@models/prompt";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@app/api/auth/[...nextauth]/route";
+import { connectToDB } from "@app/lib/db";
 
 export const DELETE = async () => {
     const session = await getServerSession(authOptions);
