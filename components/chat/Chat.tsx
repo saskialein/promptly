@@ -56,7 +56,7 @@ export default function Chat() {
           onSelectProvider={handleProviderSelection}
         />
       ) : (
-        <div className="relative flex w-full items-end gap-2">
+        <div className="relative flex w-full max-w-4xl items-end gap-2">
           <div className="relative shrink-0">
             <button
               onClick={() => setShowProviderOptions(!showProviderOptions)}
@@ -108,7 +108,7 @@ export default function Chat() {
               </motion.div>
             )}
           </div>
-          <div className="grow">
+          <div className="w-full">
             <ChatInterface provider={selectedProvider} />
           </div>
         </div>

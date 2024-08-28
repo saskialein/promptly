@@ -116,7 +116,7 @@
 }
 
 .chat {
-  @apply w-full flex justify-center items-center flex-col  max-w-full gap-0;
+  @apply w-full flex justify-center items-center flex-col max-w-full gap-1;
 }
 
 /* Form Component */

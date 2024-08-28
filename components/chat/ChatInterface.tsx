@@ -6,6 +6,7 @@ import { useChat } from 'ai/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
 
 type ChatInterfaceProps = {
@@ -13,9 +14,10 @@ type ChatInterfaceProps = {
 }
 
 export default function ChatInterface({ provider }: ChatInterfaceProps) {
-  const { messages, input, setInput, handleInputChange, handleSubmit, error } = useChat({
-    api: `/api/chat/${provider}`,
-  })
+  const { messages, input, setInput, handleInputChange, handleSubmit, error } =
+    useChat({
+      api: `/api/chat/${provider}`,
+    })
   const { prompt } = usePrompt()
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
   const hasMessages = messages.length > 0
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="mx-auto flex w-full max-w-4xl flex-col">
       <AnimatePresence>
         {hasMessages && (
           <motion.div
@@ -64,6 +66,7 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
                   <div className="inline-block max-w-[80%] break-words">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeRaw]}
                       components={{
                         pre({ children, ...props }) {
                           return (
@@ -81,14 +84,14 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
                         },
                         ul({ children, ...props }) {
                           return (
-                            <ul className="ml-5 list-inside list-disc" {...props}>
+                            <ul className="ml-5 list-disc" {...props}>
                               {children}
                             </ul>
                           )
                         },
                         ol({ children, ...props }) {
                           return (
-                            <ol className="ml-5 list-inside list-decimal" {...props}>
+                            <ol className="ml-5 list-decimal" {...props}>
                               {children}
                             </ol>
                           )
@@ -104,12 +107,6 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
                     >
                       {m.content}
                     </ReactMarkdown>
-                    {/* <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      className="prose prose-sm dark:prose-invert"
-                    >
-                      {m.content}
-                    </ReactMarkdown> */}
                   </div>
                 </div>
               ))}
@@ -118,10 +115,9 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <form onSubmit={handleSubmit} className="flex-center w-full">
+      <form onSubmit={handleSubmit} className="flex-center w-full ">
         <input
-          className="search_input"
+          className="search_input "
           value={input}
           placeholder="Paste a prompt or just chitchat with the bot..."
           onChange={handleInputChange}
