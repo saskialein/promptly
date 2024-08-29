@@ -74,19 +74,21 @@ export default function Nav() {
         </>
       ) : (
         <>
-          {providers &&
-            Object.values(providers).map((provider) => (
-              <button
-                type="button"
-                key={provider.name}
-                onClick={() => {
-                  signIn(provider.id)
-                }}
-                className="main_gradient_btn"
-              >
-                Sign in
-              </button>
-            ))}
+          <div className="hidden sm:flex">
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => {
+                    signIn(provider.id)
+                  }}
+                  className="main_gradient_btn"
+                >
+                  Sign in
+                </button>
+              ))}
+          </div>
         </>
       )}
 
