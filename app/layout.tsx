@@ -44,6 +44,9 @@ export default function RootLayout({
             {children}
           </main>
         </Providers>
+        {/* <!-- Cloudflare Web Analytics --> */}
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7231d7e4bb754cf8b529b0ed341b7e10"}'></script>
+        {/* <!-- End Cloudflare Web Analytics --> */}
       </body>
     </html>
   )
