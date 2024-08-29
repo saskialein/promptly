@@ -66,7 +66,7 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
                   <div className="inline-block max-w-[80%] break-words">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeRaw]}
+                      rehypePlugins={[rehypeRaw] as any}
                       components={{
                         pre({ children, ...props }) {
                           return (
