@@ -47,7 +47,7 @@ export default function Chat() {
 
   return (
     <section className="chat">
-      <h2 className="mb-2 font-syne text-2xl font-semibold text-gray-900 dark:text-gray-300 text-center">
+      <h2 className="mb-2 text-center font-syne text-2xl font-semibold text-gray-900 dark:text-gray-300">
         Have a chat with your favourite LLM!
       </h2>
       {!selectedProvider ? (

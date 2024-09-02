@@ -1,8 +1,9 @@
 import { Schema, model, models } from 'mongoose'
 
 const ApiKeySchema = new Schema({
-  provider: String,
-  apiKey: String,
+  provider: { type: String, required: true },
+  apiKey: { type: String, required: true },
+  iv: { type: String, required: true },
 })
 
 const UserSchema = new Schema({

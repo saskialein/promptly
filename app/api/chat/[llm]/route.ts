@@ -9,6 +9,7 @@ import User from '@models/user'
 import { convertToCoreMessages, streamText } from 'ai'
 import { getServerSession } from 'next-auth'
 import { connectToDB } from '@app/lib/db'
+import { decryptApiKey } from '@app/lib/utils'
 
 export type LLMProvider =
   | 'openai'
@@ -64,26 +65,24 @@ export async function POST(req: Request, { params }: { params: Params }) {
       return new Response('No API keys found', { status: 404 })
     }
 
-    const apiKey = user.apiKeys.find(
-      (key: ApiKey) => key.provider === llm,
-    )?.apiKey
+    const keyData = user.apiKeys.find(
+      (key: ApiKey & { iv: string }) => key.provider === llm,
+    )
 
-    if (!apiKey) {
+    if (!keyData) {
       return new Response(`No API key found for provider: ${llm}`, {
         status: 404,
       })
     }
 
-    console.log(apiKey)
+    const apiKey = decryptApiKey(keyData.iv, keyData.apiKey);
+
     const client = clientMapping[llm]({
       apiKey,
     })
     const model = modelMapping[llm]
 
-    const additionalSettings =
-      llm === 'mistral'
-        ? { safePrompt: true }
-        : {};
+    const additionalSettings = llm === 'mistral' ? { safePrompt: true } : {}
 
     const result = await streamText({
       model: client(model, additionalSettings),
@@ -93,7 +92,6 @@ export async function POST(req: Request, { params }: { params: Params }) {
 
     return result.toDataStreamResponse()
   } catch (err) {
-    console.error('Error in POST /api/chat/[provider]:', err)
     return new Response(`Error: ${err}`, { status: 500 })
   }
 }

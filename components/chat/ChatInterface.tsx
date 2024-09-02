@@ -92,7 +92,7 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
                   >
                     {m.role === 'user' ? 'You: ' : 'AI: '}
                   </span>
-                  <div className="prose dark:prose-invert inline-block max-w-[80%] break-words">
+                  <div className="prose inline-block max-w-[80%] break-words dark:prose-invert">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeRaw] as any}
@@ -107,7 +107,7 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
           </motion.div>
         )}
       </AnimatePresence>
-      <form onSubmit={handleSubmit} className="w-full relative">
+      <form onSubmit={handleSubmit} className="relative w-full">
           <textarea
             ref={textareaRef}
             className="search_input resize-none"
@@ -120,7 +120,7 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
           <div>
             <button
               onClick={handleSubmit}
-              className="send_button absolute right-2 bottom-2"
+              className="send_button absolute bottom-2 right-2"
             >
               <PaperAirplaneIcon className="size-4" />
             </button>
