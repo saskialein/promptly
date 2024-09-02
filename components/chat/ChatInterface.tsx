@@ -2,12 +2,14 @@
 
 import { LLMProvider } from '@app/api/chat/[llm]/route'
 import { usePrompt } from '@context/PromptContext'
+import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useChat } from 'ai/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import remarkGfm from 'remark-gfm'
+
 
 type ChatInterfaceProps = {
   provider: LLMProvider
@@ -18,15 +20,29 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
     useChat({
       api: `/api/chat/${provider}`,
     })
-  const { prompt } = usePrompt()
+  const { prompt, setPrompt } = usePrompt()
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     if (prompt || prompt.length > 1) {
       setInput(prompt)
+      setTimeout(() => {
+        textareaRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
     }
   }, [prompt])
 
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto'
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+    }
+
+    if (prompt && input.length == 0) {
+      setPrompt('')
+    }
+  }, [input])
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -35,6 +51,19 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
   }, [messages])
 
   const hasMessages = messages.length > 0
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter') {
+      if (e.shiftKey) {
+        e.preventDefault()
+        setInput(input + '\n')
+      } else {
+        e.preventDefault()
+        handleSubmit(e)
+        setPrompt('')
+      }
+    }
+  }
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col">
@@ -47,7 +76,7 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
             exit={{ y: '100%', opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
-            <div className="flex max-h-[500px] flex-col gap-2 overflow-y-auto">
+            <div className="flex max-h-[500px] flex-col gap-3 overflow-y-auto">
               {error && <p className="dark:text-white">{error.message}</p>}
               {messages.map((m) => (
                 <div
@@ -57,53 +86,16 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
                   }`}
                 >
                   <span
-                    className={`font-semibold ${
+                    className={`font-semibold leading-6 ${
                       m.role === 'user' ? 'green_gradient' : 'orange_gradient'
                     }`}
                   >
                     {m.role === 'user' ? 'You: ' : 'AI: '}
                   </span>
-                  <div className="inline-block max-w-[80%] break-words">
+                  <div className="prose dark:prose-invert inline-block max-w-[80%] break-words">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeRaw] as any}
-                      components={{
-                        pre({ children, ...props }) {
-                          return (
-                            <pre className="code_block" {...props}>
-                              {children}
-                            </pre>
-                          )
-                        },
-                        code({ children, ...props }) {
-                          return (
-                            <pre className="code_block">
-                              <code {...props}>{children}</code>
-                            </pre>
-                          )
-                        },
-                        ul({ children, ...props }) {
-                          return (
-                            <ul className="ml-5 list-disc" {...props}>
-                              {children}
-                            </ul>
-                          )
-                        },
-                        ol({ children, ...props }) {
-                          return (
-                            <ol className="ml-5 list-decimal" {...props}>
-                              {children}
-                            </ol>
-                          )
-                        },
-                        li({ children, ...props }) {
-                          return (
-                            <li className="ml-2" {...props}>
-                              {children}
-                            </li>
-                          )
-                        },
-                      }}
                     >
                       {m.content}
                     </ReactMarkdown>
@@ -115,14 +107,24 @@ export default function ChatInterface({ provider }: ChatInterfaceProps) {
           </motion.div>
         )}
       </AnimatePresence>
-      <form onSubmit={handleSubmit} className="flex-center w-full ">
-        <input
-          className="search_input "
-          value={input}
-          placeholder="Paste a prompt or just chitchat with the bot..."
-          onChange={handleInputChange}
-          type="text"
-        />
+      <form onSubmit={handleSubmit} className="w-full relative">
+          <textarea
+            ref={textareaRef}
+            className="search_input resize-none"
+            value={input}
+            placeholder="Paste a prompt or just chat..."
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            rows={1}
+          />{' '}
+          <div>
+            <button
+              onClick={handleSubmit}
+              className="send_button absolute right-2 bottom-2"
+            >
+              <PaperAirplaneIcon className="size-4" />
+            </button>
+          </div>
       </form>
     </div>
   )

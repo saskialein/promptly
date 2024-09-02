@@ -182,3 +182,21 @@
 .code_block {
   @apply bg-gray-900 text-white p-3 rounded-lg overflow-x-auto m-2 font-mono break-words;
 }
+
+.send_button {
+  @apply p-2 rounded-full border border-black;
+}
+
+.prose {
+  @apply leading-6 m-0
+}
+
+/* .prose p {
+  @apply text-white
+} */
+
+.search_input::placeholder {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
