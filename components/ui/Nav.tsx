@@ -11,7 +11,7 @@ import {
   LiteralUnion,
   ClientSafeProvider,
 } from 'next-auth/react'
-import { BuiltInProviderType } from 'next-auth/providers'
+import { BuiltInProviderType } from 'next-auth/providers/index'
 
 export default function Nav() {
   const { data: session } = useSession()
