@@ -2,7 +2,7 @@
   <img src="public/assets/images/logo.svg" alt="Promptly Logo" width="100"/>
 </p>
 <h1 align="center">
-    <a href="https://dev" target="_blank">Promptly</a>
+    <a href="https://promptly.saskia.dev" target="_blank">Promptly</a>
 </h1>
 
 **Promptly** is an AI prompt playground and chat app that allows users to manage and test prompts across different AI models. With support for multiple API keys, users can switch between AI models, save and organize their prompts, and track their usage for efficient experimentation and prompt optimization.
